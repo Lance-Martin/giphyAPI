@@ -10,8 +10,8 @@ $(document).ready(function(){
 		    a.attr('data-name', buttons[i]);
 		    a.text(buttons[i]);
 		    $('#buttons').append(a);
-        clicks();
 		}
+    clicks();
   }
 
   $('#addSport').on('click', function(){
@@ -20,6 +20,21 @@ $(document).ready(function(){
 		renderButtons();
 		return false;
 	 });
+
+function imgClick() {
+  $('img').on('click',function(){
+    console.log('image has been clicked');
+    if ($(this).attr('src') == $(this).data('still')) {
+      $(this).removeAttr('src');
+      $(this).attr('src',$(this).data('animate'));
+    }
+    else {
+      console.log('should be pausing');
+      $(this).removeAttr('src');
+      $(this).attr('src',$(this).data('still'));
+    }
+  });
+}
 
 function clicks() {
    $('button').on('click', function(){
@@ -30,8 +45,9 @@ function clicks() {
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + p + "&api_key=dc6zaTOxFJmzC&limit=10";
     $.ajax({url: queryURL, method: 'GET'})
      .done(function(response) {
+        console.log(response);
          var results = response.data;
-         for(var i=0; i < results.length; i++){
+         for(var i=0; i < 11; i++){
             if (results[i].rating == "r" || results[i].rating == "pg-13")
             {
             }
@@ -40,16 +56,17 @@ function clicks() {
              var rating = results[i].rating;
              var p = $('<p>').text( "Rating: " + rating);
              var personImage = $('<img>');
-             personImage.attr('src', results[i].images.fixed_height.url);
+             personImage.attr('src', results[i].images.fixed_height_still.url);
+             personImage.attr('data-animate',results[i].images.fixed_height.url);
+             personImage.attr('data-still', results[i].images.fixed_height_still.url);
              gifDiv.append(p);
              gifDiv.append(personImage);
              $('#display').prepend(gifDiv);
+             imgClick();
             }
          }
-
-    });
-});
+     });
+   });
 }
   renderButtons();
-  clicks();
 });
