@@ -4,15 +4,23 @@
     <meta charset="utf-8">
     <title>Extreme gifs</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
+    <div class="fullscreen-bg">
+    <video loop muted autoplay poster="assets/css.skyDiveBack.jpg"  class="fullscreen-bg__video">
+        <source src="video.webm" type="video/webm">
+    </video>
+    </div>
     <div class="row">
-      <div class="col-md-8" id="buttons"></div>
-      <div class="col-md-8" id="display"></div>
+      <div class="col-md-12" id="buttons"></div>
+    </div>
+    <div class="row">
+      <div class=" row col-md-8" id="display"></div>
       <div class="col-md-4" id="userSearch">
         <form id="sport-form">
-        <label for="sport-input">Add another extreme sport: </label><br>
+        <label for="sport-input" id = "addLabel">Add another extreme sport: </label><br>
         <input type="text" id="sport-input"><br>
         <input id="addSport" type="submit" value="Add sport">
         </form>

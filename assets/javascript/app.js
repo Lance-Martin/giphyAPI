@@ -24,6 +24,8 @@ $(document).ready(function(){
 function imgClick() {
   $('img').on('click',function(){
     console.log('image has been clicked');
+    console.log($(this).attr('src'));
+    console.log($(this).data('still'));
     if ($(this).attr('src') == $(this).data('still')) {
       $(this).removeAttr('src');
       $(this).attr('src',$(this).data('animate'));
@@ -52,19 +54,20 @@ function clicks() {
             {
             }
             else {
-            var gifDiv = $('<div class="item">');
+            var gifDiv = $('<div class="item col-md-4">');
              var rating = results[i].rating;
              var p = $('<p>').text( "Rating: " + rating);
-             var personImage = $('<img>');
+             var personImage = $('<img style="width: 100%; height: 200px;">');
              personImage.attr('src', results[i].images.fixed_height_still.url);
              personImage.attr('data-animate',results[i].images.fixed_height.url);
              personImage.attr('data-still', results[i].images.fixed_height_still.url);
              gifDiv.append(p);
              gifDiv.append(personImage);
              $('#display').prepend(gifDiv);
-             imgClick();
             }
+            imgClick();
          }
+
      });
    });
 }
