@@ -24,18 +24,17 @@ $(document).ready(function(){
 	 });
 
 //function to pause and play gifs. If the clicked gif has a src that equals the gifs data-still attribute then remove the current src attribute and replace it with a src attribute equal to the gifs data-animate attribute. Else set the src attribute back to the data-still attribute.
-function imgClick() {
-  $('img').on('click',function(){
+function imgClick(image) {
+  $(image).on('click',function(){
     console.log('image has been clicked');
     console.log($(this).attr('src'));
     console.log($(this).data('still'));
-    if ($(this).attr('src') == $(this).data('still')) {
-      $(this).removeAttr('src');
+    if ($(this).attr('src') === $(this).data('still')) {
+      console.log('Play');
       $(this).attr('src',$(this).data('animate'));
     }
-    else {
+     else {
       console.log('should be pausing');
-      $(this).removeAttr('src');
       $(this).attr('src',$(this).data('still'));
     }
   });
@@ -47,7 +46,7 @@ function clicks() {
     console.log("clicking");
     $('#display').empty();
     var p = $(this).data('name');
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + p + "&api_key=dc6zaTOxFJmzC&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + p + "&api_key=dc6zaTOxFJmzC&limit=10";
     $.ajax({url: queryURL, method: 'GET'})
      .done(function(response) {
         console.log(response);
@@ -68,10 +67,11 @@ function clicks() {
              gifDiv.append(gifImage);
              $('#display').prepend(gifDiv);
             }
-            imgClick();
+            imgClick(gifImage);
          }
      });
    });
 }
+
   renderButtons();
 });
